@@ -19,7 +19,7 @@ export default function NotFound() {
   const username = searchParams.get("username");
 
   return (
-    <Center flex="1" bg="bg" color="fg">
+    <Center flex="1">
       <Stack gap={6} align="center" textAlign="center">
         <Heading size="2xl" color="destructive/80">
           404 - User Not Found!

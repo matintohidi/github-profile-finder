@@ -7,15 +7,17 @@ import { ThemeProvider, useTheme } from "next-themes";
 import * as React from "react";
 import { LuMoon, LuSun } from "react-icons/lu";
 
-export interface ColorModeProviderProps extends ThemeProviderProps {}
+export interface ColorModeProviderProps extends ThemeProviderProps {
+}
 
-export function ColorModeProvider(props: ColorModeProviderProps) {
+export function ColorModeProvider({ ...props }: ColorModeProviderProps) {
   return (
     <ThemeProvider 
       attribute="class" 
       disableTransitionOnChange={false}
       enableSystem={true}
       defaultTheme="system"
+      storageKey="chakra-ui-color-mode"
       {...props} 
     />
   );

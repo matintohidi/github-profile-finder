@@ -5,7 +5,7 @@ import { FiGithub, FiHome } from "react-icons/fi";
 
 export default function NotFound() {
   return (
-    <Center flex="1" bg="bg" color="fg">
+    <Center flex="1">
       <Stack align="center" gap={8}>
         <Box position="relative">
           <Text fontWeight="bold" fontSize="9xl" color="primary">
