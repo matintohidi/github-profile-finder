@@ -112,6 +112,7 @@ export const ColorModeButton = React.forwardRef<
         variant="outline"
         aria-label="Toggle color mode"
         size="sm"
+				rounded="full"
         disabled={isAnimating}
         {...props}
         css={{

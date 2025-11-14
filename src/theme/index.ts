@@ -2,11 +2,27 @@ import { createSystem, defaultConfig } from "@chakra-ui/react";
 
 export const system = createSystem(defaultConfig, {
   theme: {
+    breakpoints: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     tokens: {
       fonts: {
         body: { value: "var(--font-geist-sans), sans-serif" },
         heading: { value: "var(--font-geist-sans), sans-serif" },
         mono: { value: "var(--font-geist-mono), monospace" },
+      },
+      sizes: {
+        container: {
+          sm: { value: "640px" },
+          md: { value: "768px" },
+          lg: { value: "1024px" },
+          xl: { value: "1280px" },
+          "2xl": { value: "1536px" },
+        },
       },
     },
     semanticTokens: {
