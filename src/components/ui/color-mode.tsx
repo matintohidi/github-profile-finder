@@ -11,7 +11,13 @@ export interface ColorModeProviderProps extends ThemeProviderProps {}
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
+    <ThemeProvider 
+      attribute="class" 
+      disableTransitionOnChange={false}
+      enableSystem={true}
+      defaultTheme="system"
+      {...props} 
+    />
   );
 }
 
@@ -51,16 +57,62 @@ interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
   ColorModeButtonProps
->(function ColorModeButton(props, ref) {
+>(function ColorModeButton(props, forwardedRef) {
   const { toggleColorMode } = useColorMode();
+  const [isAnimating, setIsAnimating] = React.useState(false);
+  const buttonRef = React.useRef<HTMLButtonElement>(null);
+
+  const handleToggle = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!document.startViewTransition) {
+      toggleColorMode();
+      return;
+    }
+
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    setIsAnimating(true);
+
+    const transition = document.startViewTransition(() => {
+      toggleColorMode();
+    });
+
+    await transition.ready;
+
+    const clipPath = [
+      `circle(0px at ${x}px ${y}px)`,
+      `circle(${Math.hypot(
+       	 Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y)
+      )}px at ${x}px ${y}px)`,
+    ];
+
+    document.documentElement.animate(
+      {
+        clipPath,
+      },
+      {
+        duration: 600,
+        easing: "linear",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+
+    await transition.finished;
+    setIsAnimating(false);
+  };
+
   return (
     <ClientOnly fallback={<Skeleton boxSize="9" />}>
       <IconButton
-        onClick={toggleColorMode}
-        variant="ghost"
+        ref={forwardedRef || buttonRef}
+        onClick={handleToggle}
+        variant="outline"
         aria-label="Toggle color mode"
         size="sm"
-        ref={ref}
+        disabled={isAnimating}
         {...props}
         css={{
           _icon: {
