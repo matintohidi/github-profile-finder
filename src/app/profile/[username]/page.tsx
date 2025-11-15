@@ -1,9 +1,12 @@
 import { VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { LuArrowLeft } from "react-icons/lu";
 import ProfileHeader from "@/app/profile/[username]/_components/profile-header";
+import { ProfileHeaderSkeleton } from "@/app/profile/[username]/_components/profile-header/profile-skeleton";
 import Repositories from "@/app/profile/[username]/_components/repository";
+import RepositoriesSkeleton from "@/app/profile/[username]/_components/repository/repository-skeleton";
 import { API_URL } from "@/configs/app.config";
 import type { GithubUser } from "@/interfaces/github.interface";
 
@@ -25,6 +28,38 @@ async function getUserData(username: string): Promise<GithubUser | null> {
   }
 }
 
+async function ProfileHeaderWrapper({ username }: { username: string }) {
+  const userData = await getUserData(username);
+
+  if (!userData) {
+    notFound();
+  }
+
+  return <ProfileHeader user={userData} />;
+}
+
+async function RepositoriesWrapper({
+  username,
+  page,
+}: {
+  username: string;
+  page: number;
+}) {
+  const userData = await getUserData(username);
+
+  if (!userData) {
+    return null;
+  }
+
+  return (
+    <Repositories
+      username={username}
+      page={page}
+      totalRepos={userData.public_repos}
+    />
+  );
+}
+
 export default async function ProfilePage({
   params,
   searchParams,
@@ -40,24 +75,18 @@ export default async function ProfilePage({
     notFound();
   }
 
-  const userData = await getUserData(username);
-
-  if (!userData) {
-    notFound();
-  }
-
   return (
     <VStack>
       <Link href="/" style={{ alignSelf: "flex-start", marginBottom: "16px" }}>
         <LuArrowLeft style={{ display: "inline-block", marginRight: "8px" }} />
         Back to Search
       </Link>
-      <ProfileHeader user={userData} />
-      <Repositories 
-        username={username} 
-        page={currentPage}
-        totalRepos={userData.public_repos}
-      />
+      <Suspense fallback={<ProfileHeaderSkeleton />}>
+        <ProfileHeaderWrapper username={username} />
+      </Suspense>
+      <Suspense fallback={<RepositoriesSkeleton />}>
+        <RepositoriesWrapper username={username} page={currentPage} />
+      </Suspense>
     </VStack>
   );
 }
