@@ -1,7 +1,7 @@
 import { Box, Grid, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import { LuCalendar, LuLink, LuMapPin, LuUsers } from "react-icons/lu";
-import { UserInfoBox } from "@/app/profile/[username]/_components/user-info-box";
+import { UserInfoBox } from "@/app/profile/[username]/_components/profile-header/user-info-box";
 import type { GithubUser } from "@/interfaces/github.interface";
 
 interface ProfileHeaderProps {
@@ -14,14 +14,13 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
     month: 'short',
   })
 
-	user.blog = 'https://matinfqfqfqfqtohidi.ir'
-
   return (
     <Box
       borderWidth={1}
 			rounded="md"
 			p={6}
       bg="bg.panel"
+			width="100%"
     >
       <Stack direction={{ base: "column", md: "row" }} gap={6} align="start">
         <Box flexShrink={0}>

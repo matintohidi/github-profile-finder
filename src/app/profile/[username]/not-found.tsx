@@ -10,13 +10,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FiGithub, FiHome } from "react-icons/fi";
 
 // get username from params and show not found message
 export default function NotFound() {
-  const searchParams = useSearchParams();
-  const username = searchParams.get("username");
+	const pathname = usePathname();
+  const username = pathname?.split('/')[2] || 'unknown';
 
   return (
     <Center flex="1">

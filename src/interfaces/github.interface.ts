@@ -23,3 +23,19 @@ export interface GithubUser {
   created_at: string;
   updated_at: string;
 }
+
+export interface GithubRepository {
+  id: number;
+  name: string;
+  full_name: string;
+  description: string | null;
+  html_url: string;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  updated_at: string;
+  visibility: string;
+  fork: boolean;
+  owner: GithubUser;
+  default_branch: string;
+}

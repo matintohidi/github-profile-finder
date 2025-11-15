@@ -1,4 +1,4 @@
-import { Box, HStack, Link, Stack, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Link, Text } from "@chakra-ui/react";
 import type { IconType } from "react-icons";
 import { Tooltip } from "@/components/ui/tooltip";
 
