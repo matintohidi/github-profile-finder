@@ -24,6 +24,7 @@ export default function Search() {
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+	// useCallback to memoize the searchUsers function and prevent unnecessary re-creations
   const searchUsers = useCallback(async (query: string) => {
     if (!query.trim()) {
       setResult([]);
