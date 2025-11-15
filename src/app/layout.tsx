@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Provider>
-          <Container maxW="container.xl" flex="1" display="flex" flexDirection="column" px={{ base: 4, md: 6, lg: 8 }}>
+          <Container maxW="container.lg" flex="1" display="flex" flexDirection="column" px={{ base: 4, md: 6, lg: 8 }}>
             <Header />
             {children}
           </Container>
