@@ -1,7 +1,4 @@
-"use client";
-
 import { Box, Grid, Heading, Text, VStack } from "@chakra-ui/react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { REPOS_PER_PAGE } from "@/app/profile/[username]/_components/repository";
 import { RepositoryCard } from "@/app/profile/[username]/_components/repository/repository-card";
 import { RepositoryPagination } from "@/app/profile/[username]/_components/repository/repository-pagination";
@@ -11,24 +8,16 @@ interface RepositoryListProps {
   repositories: GithubRepository[];
   currentPage: number;
   totalRepos: number;
+  username: string;
 }
 
 export function RepositoryList({
   repositories,
   currentPage,
   totalRepos,
+  username,
 }: RepositoryListProps) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-	
   const totalPages = Math.ceil(totalRepos / REPOS_PER_PAGE);
-
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    router.push(`?${params.toString()}`);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   if (repositories.length === 0 && currentPage === 1) {
     return (
@@ -68,7 +57,7 @@ export function RepositoryList({
       <RepositoryPagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={handlePageChange}
+        username={username}
       />
     </VStack>
   );

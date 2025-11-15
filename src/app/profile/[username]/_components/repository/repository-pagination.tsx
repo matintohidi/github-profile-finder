@@ -5,20 +5,28 @@ import {
   IconButton,
   Pagination,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { REPOS_PER_PAGE } from "@/app/profile/[username]/_components/repository";
 
 interface RepositoryPaginationProps {
   currentPage: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
+  username: string;
 }
 
 export function RepositoryPagination({
   currentPage,
   totalPages,
-  onPageChange,
+  username,
 }: RepositoryPaginationProps) {
+  const router = useRouter();
+
+  const handlePageChange = (page: number) => {
+    router.push(`/profile/${username}?page=${page}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   if (totalPages <= 1) return null;
 
   return (
@@ -26,7 +34,7 @@ export function RepositoryPagination({
       count={totalPages * REPOS_PER_PAGE}
       pageSize={REPOS_PER_PAGE}
       page={currentPage}
-      onPageChange={(e) => onPageChange(e.page)}
+      onPageChange={(e) => handlePageChange(e.page)}
 			mb={4}
     >
       <ButtonGroup variant="ghost" size="sm">

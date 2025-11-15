@@ -57,6 +57,7 @@ export default async function Repositories({
       repositories={repositories} 
       currentPage={page}
       totalRepos={totalRepos}
+      username={username}
     />
   );
 }

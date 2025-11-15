@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Grid, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
 import { LuCalendar, LuLink, LuMapPin, LuUsers } from "react-icons/lu";
@@ -9,7 +11,8 @@ interface ProfileHeaderProps {
 }
 
 export default function ProfileHeader({ user }: ProfileHeaderProps) {
-	const joinDate = new Date(user.created_at).toLocaleDateString('en-US', {
+	const date = new Date(user.created_at);
+	const joinDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
   })

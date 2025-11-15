@@ -18,6 +18,7 @@ export function ColorModeProvider({ ...props }: ColorModeProviderProps) {
       enableSystem={true}
       defaultTheme="system"
       storageKey="chakra-ui-color-mode"
+      enableColorScheme={false}
       {...props} 
     />
   );
