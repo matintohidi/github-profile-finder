@@ -14,7 +14,7 @@ async function getUserData(username: string): Promise<GithubUser | null> {
   try {
     const response = await fetch(`${API_URL}/users/${username}`, {
       next: {
-        revalidate: 3600,
+        revalidate: 1 * 60 * 60,
       },
     });
 

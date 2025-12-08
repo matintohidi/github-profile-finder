@@ -1,6 +1,14 @@
-'use client';
+"use client";
 
-import { Box, Grid, Heading, HStack, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { LuCalendar, LuLink, LuMapPin, LuUsers } from "react-icons/lu";
 import { UserInfoBox } from "@/app/profile/[username]/_components/profile-header/user-info-box";
@@ -11,20 +19,14 @@ interface ProfileHeaderProps {
 }
 
 export default function ProfileHeader({ user }: ProfileHeaderProps) {
-	const date = new Date(user.created_at);
-	const joinDate = date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-  })
+  const date = new Date(user.created_at);
+  const joinDate = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+  });
 
   return (
-    <Box
-      borderWidth={1}
-			rounded="md"
-			p={6}
-      bg="bg.panel"
-			width="100%"
-    >
+    <Box borderWidth={1} rounded="md" p={6} bg="bg.panel" width="100%">
       <Stack direction={{ base: "column", md: "row" }} gap={6} align="start">
         <Box flexShrink={0}>
           <Image
@@ -70,7 +72,7 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
             templateColumns={{
               base: "repeat(2, 1fr)",
               md: "repeat(3, 1fr)",
-              lg: "repeat(5, 1fr)"
+              lg: "repeat(5, 1fr)",
             }}
             gap={{ base: 3, sm: 4 }}
             width="100%"
@@ -97,14 +99,10 @@ export default function ProfileHeader({ user }: ProfileHeaderProps) {
                 icon={LuLink}
                 label="Website"
                 value={user.blog}
-								link
+                link
               />
             )}
-            <UserInfoBox
-              icon={LuCalendar}
-              label="Joined"
-              value={joinDate}
-            />
+            <UserInfoBox icon={LuCalendar} label="Joined" value={joinDate} />
           </Grid>
         </VStack>
       </Stack>

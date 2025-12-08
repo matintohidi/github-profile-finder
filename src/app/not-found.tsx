@@ -1,4 +1,12 @@
-import { Box, Button, Center, Heading, Separator, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Heading,
+  Separator,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { BiSearch } from "react-icons/bi";
 import { FiGithub, FiHome } from "react-icons/fi";
@@ -29,26 +37,21 @@ export default function NotFound() {
 
         <Stack align="center" gap={4} textAlign="center">
           <Heading size="xl" color="fg">
-						Page Not Found!
+            Page Not Found!
           </Heading>
           <Text color="fg.muted" fontSize="lg" maxW="md">
-						Unfortunately, the page you are looking for does not exist
+            Unfortunately, the page you are looking for does not exist
           </Text>
         </Stack>
 
-				<Stack direction="row" align="center" w="full">
-					<Separator flex="1" />
-					<FiGithub size={20} color="var(--chakra-colors-fg-muted)" />
-					<Separator flex="1" />
-				</Stack>
+        <Stack direction="row" align="center" w="full">
+          <Separator flex="1" />
+          <FiGithub size={20} color="var(--chakra-colors-fg-muted)" />
+          <Separator flex="1" />
+        </Stack>
 
         <Link href="/">
-          <Button
-            bg="primary"
-            color="primary.fg"
-            size="lg"
-            px={8}
-          >
+          <Button bg="primary" color="primary.fg" size="lg" px={8}>
             <FiHome />
             Back to Home
           </Button>

@@ -7,16 +7,16 @@ export const REPOS_PER_PAGE = 6;
 
 async function getRepositories(
   username: string,
-  page: number
+  page: number,
 ): Promise<GithubRepository[]> {
   try {
     const response = await fetch(
       `${API_URL}/users/${username}/repos?sort=updated&per_page=${REPOS_PER_PAGE}&page=${page}`,
       {
         next: {
-          revalidate: 3600,
+          revalidate: 1 * 60 * 60,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -35,17 +35,17 @@ interface RepositoriesProps {
   totalRepos: number;
 }
 
-export default async function Repositories({ 
-  username, 
+export default async function Repositories({
+  username,
   page,
-  totalRepos 
+  totalRepos,
 }: RepositoriesProps) {
   const totalPages = Math.ceil(totalRepos / REPOS_PER_PAGE);
-  
+
   if (page > totalPages && totalPages > 0) {
     redirect(`/profile/${username}?page=${totalPages}`);
   }
-  
+
   if (page < 1) {
     redirect(`/profile/${username}?page=1`);
   }
@@ -53,8 +53,8 @@ export default async function Repositories({
   const repositories = await getRepositories(username, page);
 
   return (
-    <RepositoryList 
-      repositories={repositories} 
+    <RepositoryList
+      repositories={repositories}
       currentPage={page}
       totalRepos={totalRepos}
       username={username}

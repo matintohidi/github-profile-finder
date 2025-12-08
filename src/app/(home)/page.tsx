@@ -13,9 +13,12 @@ export default function Home() {
             Discover and explore GitHub profiles with ease
           </Text>
         </Stack>
+
         <Search />
+
         <Text fontSize="sm" color="fg.muted">
-          Enter any GitHub username to view their profile, repositories, and activity
+          Enter any GitHub username to view their profile, repositories, and
+          activity
         </Text>
       </Stack>
     </Center>

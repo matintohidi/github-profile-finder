@@ -25,20 +25,21 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
           transform: "translateY(-2px)",
           boxShadow: "md",
         }}
-				align="start"
+        align="start"
         transition="all 0.2s"
       >
-        <VStack align="start" gap={3} height="100%" justifyContent="space-between">
+        <VStack
+          align="start"
+          gap={3}
+          height="100%"
+          justifyContent="space-between"
+        >
           <VStack align="start" gap={1}>
             <Text fontSize="lg" fontWeight="bold" color="colorPalette.fg">
               {repository.name}
             </Text>
             {repository.description && (
-              <Text
-                fontSize="sm"
-                color="fg.muted"
-                lineClamp={2}
-              >
+              <Text fontSize="sm" color="fg.muted" lineClamp={2}>
                 {repository.description}
               </Text>
             )}
@@ -67,7 +68,7 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
                 </Text>
               </HStack>
               <HStack gap={1}>
-								<LuGitBranch size={16} />
+                <LuGitBranch size={16} />
                 <Text fontSize="sm" color="fg.muted">
                   {repository.default_branch}
                 </Text>

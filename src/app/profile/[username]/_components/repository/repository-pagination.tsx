@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ButtonGroup,
-  IconButton,
-  Pagination,
-} from "@chakra-ui/react";
+import { ButtonGroup, IconButton, Pagination } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { REPOS_PER_PAGE } from "@/app/profile/[username]/_components/repository";
@@ -35,7 +31,7 @@ export function RepositoryPagination({
       pageSize={REPOS_PER_PAGE}
       page={currentPage}
       onPageChange={(e) => handlePageChange(e.page)}
-			mb={4}
+      mb={4}
     >
       <ButtonGroup variant="ghost" size="sm">
         <Pagination.PrevTrigger asChild>

@@ -35,19 +35,17 @@ export async function ProfileHeaderSkeleton() {
             width="100%"
             mt={2}
           >
-            {[...Array(5)].map(
-              (_) => (
-                <Box
-                  key={`skeleton-info-${uuid()}`}
-                  p={3}
-                  borderWidth={1}
-                  rounded="md"
-                >
-                  <Skeleton height="16px" width="60%" mb={2} />
-                  <Skeleton height="20px" width="80%" />
-                </Box>
-              ),
-            )}
+            {[...Array(5)].map((_) => (
+              <Box
+                key={`skeleton-info-${uuid()}`}
+                p={3}
+                borderWidth={1}
+                rounded="md"
+              >
+                <Skeleton height="16px" width="60%" mb={2} />
+                <Skeleton height="20px" width="80%" />
+              </Box>
+            ))}
           </Grid>
         </VStack>
       </Stack>

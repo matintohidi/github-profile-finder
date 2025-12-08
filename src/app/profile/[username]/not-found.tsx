@@ -15,8 +15,8 @@ import { FiGithub, FiHome } from "react-icons/fi";
 
 // get username from params and show not found message
 export default function NotFound() {
-	const pathname = usePathname();
-  const username = pathname?.split('/')[2] || 'unknown';
+  const pathname = usePathname();
+  const username = pathname?.split("/")[2] || "unknown";
 
   return (
     <Center flex="1">
@@ -26,7 +26,10 @@ export default function NotFound() {
         </Heading>
 
         <Text color="fg.muted" fontSize="lg" maxW="md">
-          <Highlight query={username || "unknown"} styles={{ bg: "primary/40", px: 1, rounded: "md" }}>
+          <Highlight
+            query={username || "unknown"}
+            styles={{ bg: "primary/40", px: 1, rounded: "md" }}
+          >
             {`Unfortunately, we couldn't find a GitHub user with the username "${username || "unknown"}".`}
           </Highlight>
         </Text>

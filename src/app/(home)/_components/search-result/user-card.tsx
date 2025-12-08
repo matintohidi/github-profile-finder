@@ -13,11 +13,11 @@ interface UserCardProps {
 export default function UserCard({ user, isFirst, isLast }: UserCardProps) {
   return (
     <Link href={`/profile/${user.login}`}>
-      <Flex 
-        gap={2} 
-				px={4}
-				py={4}
-        align="center" 
+      <Flex
+        gap={2}
+        px={4}
+        py={4}
+        align="center"
         transition="all 0.2s"
         _hover={{ bg: "primary/10" }}
         roundedTop={isFirst ? "md" : "none"}
@@ -38,8 +38,13 @@ export default function UserCard({ user, isFirst, isLast }: UserCardProps) {
         </Box>
         <Text>{user.login}</Text>
 
-        <Text ml="auto" fontSize="sm" color="fg.muted" _hover={{ color: 'primary' }}>
-          View More <LuArrowRight style={{ display: 'inline' }} />
+        <Text
+          ml="auto"
+          fontSize="sm"
+          color="fg.muted"
+          _hover={{ color: "primary" }}
+        >
+          View More <LuArrowRight style={{ display: "inline" }} />
         </Text>
       </Flex>
     </Link>

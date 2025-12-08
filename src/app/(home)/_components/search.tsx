@@ -2,17 +2,12 @@
 
 import { Button, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import {
-  type FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type FormEvent, useCallback, useRef, useState } from "react";
 import SearchResult from "@/app/(home)/_components/search-result";
 import SearchInput from "@/components/input/search-input";
 import { toaster } from "@/components/ui/toaster";
 import { API_URL } from "@/configs/app.config";
+import { useDebounce } from "@/hooks/useDebounce";
 import type { GithubUserSummary } from "@/interfaces/github.interface";
 
 export default function Search() {
@@ -20,11 +15,11 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GithubUserSummary[]>([]);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const router = useRouter();
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-	// useCallback to memoize the searchUsers function and prevent unnecessary re-creations
+  const router = useRouter();
+
+  // useCallback to memoize the searchUsers function and prevent unnecessary re-creations
   const searchUsers = useCallback(async (query: string) => {
     if (!query.trim()) {
       setResult([]);
@@ -65,17 +60,14 @@ export default function Search() {
     }
   }, []);
 
+  // Use the debounce hook for the search function
+  const debouncedSearch = useDebounce(searchUsers, 300);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setUsername(value);
 
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
-
-    debounceTimer.current = setTimeout(() => {
-      searchUsers(value);
-    }, 300);
+    debouncedSearch(value);
   };
 
   const handleClear = () => {
@@ -92,15 +84,6 @@ export default function Search() {
       setIsSearchOpen(false);
     }
   };
-
-  useEffect(() => {
-    return () => {
-      // Cleanup debounce timer on unmount to prevent memory leaks
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
-      }
-    };
-  }, []);
 
   return (
     <form onSubmit={handleSubmit}>

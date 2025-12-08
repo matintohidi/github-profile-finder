@@ -7,19 +7,18 @@ import { ThemeProvider, useTheme } from "next-themes";
 import * as React from "react";
 import { LuMoon, LuSun } from "react-icons/lu";
 
-export interface ColorModeProviderProps extends ThemeProviderProps {
-}
+export interface ColorModeProviderProps extends ThemeProviderProps {}
 
 export function ColorModeProvider({ ...props }: ColorModeProviderProps) {
   return (
-    <ThemeProvider 
-      attribute="class" 
+    <ThemeProvider
+      attribute="class"
       disableTransitionOnChange={false}
       enableSystem={true}
       defaultTheme="system"
       storageKey="chakra-ui-color-mode"
       enableColorScheme={false}
-      {...props} 
+      {...props}
     />
   );
 }
@@ -87,8 +86,8 @@ export const ColorModeButton = React.forwardRef<
     const clipPath = [
       `circle(0px at ${x}px ${y}px)`,
       `circle(${Math.hypot(
-       	 Math.max(x, window.innerWidth - x),
-        Math.max(y, window.innerHeight - y)
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
       )}px at ${x}px ${y}px)`,
     ];
 
@@ -100,7 +99,7 @@ export const ColorModeButton = React.forwardRef<
         duration: 600,
         easing: "linear",
         pseudoElement: "::view-transition-new(root)",
-      }
+      },
     );
 
     await transition.finished;
@@ -115,7 +114,7 @@ export const ColorModeButton = React.forwardRef<
         variant="outline"
         aria-label="Toggle color mode"
         size="sm"
-				rounded="full"
+        rounded="full"
         disabled={isAnimating}
         {...props}
         css={{

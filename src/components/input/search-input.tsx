@@ -3,6 +3,8 @@ import type { ForwardedRef } from "react";
 import { forwardRef, useState } from "react";
 import { BiSearch, BiX } from "react-icons/bi";
 
+type InputSize = "sm" | "md" | "lg";
+
 interface SearchInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,7 +12,7 @@ interface SearchInputProps {
   onFocus?: () => void;
   placeholder?: string;
   loading?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: InputSize;
 }
 
 const SearchInput = forwardRef(function SearchInput(
@@ -27,17 +29,17 @@ const SearchInput = forwardRef(function SearchInput(
 ) {
   const [isFocused, setIsFocused] = useState(false);
 
-  const sizeMap = {
+  const sizeMap: Record<InputSize, number> = {
     sm: 16,
     md: 18,
     lg: 20,
   };
   const iconSize = sizeMap[size] || 20;
-  const spinnerSizeMap = {
+  const spinnerSizeMap: Record<InputSize, "xs" | "sm" | "md"> = {
     sm: "xs",
     md: "sm",
     lg: "md",
-  } as const;
+  };
   const spinnerSize = spinnerSizeMap[size] ?? "md";
 
   const handleFocus = () => {
@@ -56,7 +58,7 @@ const SearchInput = forwardRef(function SearchInput(
       borderColor={isFocused ? "primary" : "muted"}
       rounded="lg"
       overflow="hidden"
-			gap={0}
+      gap={0}
     >
       <Box
         display="flex"
@@ -81,7 +83,7 @@ const SearchInput = forwardRef(function SearchInput(
           outline: "none",
           boxShadow: "none",
         }}
-				px={0}
+        px={0}
       />
       <Box display="flex" alignItems="center" gap={2} px={2}>
         {loading && (

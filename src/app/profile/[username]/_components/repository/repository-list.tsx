@@ -47,7 +47,7 @@ export function RepositoryList({
         }}
         gap={4}
         width="100%"
-				mb={4}
+        mb={4}
       >
         {repositories.map((repo) => (
           <RepositoryCard key={repo.id} repository={repo} />

@@ -15,16 +15,11 @@ export function UserInfoBox({
   value,
   link,
 }: UserInfoBoxProps) {
-  const displayValue = link ? value.replace(/^https?:\/\//, '') : value;
+  const displayValue = link ? value.replace(/^https?:\/\//, "") : value;
   const isLongText = displayValue.length > 20;
 
   return (
-    <HStack 
-      align="center" 
-      gap={2}
-      flex="1"
-      minW={{ base: "100%", sm: "0" }}
-    >
+    <HStack align="center" gap={2} flex="1" minW={{ base: "100%", sm: "0" }}>
       <Icon size={20} color="var(--chakra-colors-primary)" />
       <Box minW={0} flex={1}>
         <Text fontSize="sm" color="fg.muted" mb={0.5}>
@@ -32,14 +27,14 @@ export function UserInfoBox({
         </Text>
         {link ? (
           <Tooltip content={displayValue} disabled={!isLongText}>
-            <Link 
+            <Link
               href={value}
-              target="_blank" 
+              target="_blank"
               fontSize="md"
               fontWeight="semibold"
-              _hover={{ 
+              _hover={{
                 color: "fg.muted",
-                textDecoration: "underline" 
+                textDecoration: "underline",
               }}
               outline={0}
               overflow="hidden"
@@ -51,11 +46,7 @@ export function UserInfoBox({
             </Link>
           </Tooltip>
         ) : (
-          <Text 
-            fontSize="md" 
-            fontWeight="semibold"
-            title={value}
-          >
+          <Text fontSize="md" fontWeight="semibold" title={value}>
             {value}
           </Text>
         )}
