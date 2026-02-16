@@ -1,14 +1,20 @@
+/* biome-ignore lint:correctness/noUnknownTypeSelector */
 ::view-transition-old(root),
-::view-transition-new(root) {
+/* biome-ignore lint:correctness/noUnknownTypeSelector */
+  ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
 html {
-  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+  transition:
+    background-color 0.3s ease-out,
+    color 0.3s ease-out;
 }
 
 body {
-  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+  transition:
+    background-color 0.3s ease-out,
+    color 0.3s ease-out;
   font-family: var(--font-geist-sans), sans-serif;
 }
